@@ -1,14 +1,16 @@
 <template>
   <div :class="[!done ? 'todoItem' : 'doneItem']">
     <div class="content">
-      <div class="id">{{ id }}</div>
+      <input type="checkbox" v-model="isChecked" class="checkbox" />
       <div class="details">
         <div class="name">{{ name }}</div>
         <div class="time">Added on: {{ time }}</div>
       </div>
       <div class="actions">
-        <button @click="remove(id)" class="delete-btn">Delete</button>
-        <button @click="favorite(id)" class="favorite-btn">Favorite</button>
+        <button @click="$emit('remove', id)" class="delete-btn">Delete</button>
+        <button @click="$emit('favorite', id)" class="favorite-btn">
+          Favorite
+        </button>
       </div>
     </div>
   </div>
@@ -17,7 +19,12 @@
 <script>
 export default {
   name: "TodoItem",
-  props: ["id", "name", "done", "time", "remove", "favorite"],
+  props: ["id", "name", "done", "time"],
+  data() {
+    return {
+      isChecked: false, // Локальное состояние для чекбокса
+    };
+  },
 };
 </script>
 
@@ -44,10 +51,8 @@ export default {
   gap: 10px;
 }
 
-.id {
-  width: 40px;
-  text-align: center;
-  font-weight: bold;
+.checkbox {
+  margin-right: 10px;
 }
 
 .details {

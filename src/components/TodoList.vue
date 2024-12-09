@@ -1,19 +1,19 @@
 <template>
-  <div className="container">
+  <div class="container">
     <textarea
       v-model="itemName"
       class="text-input"
       placeholder="add your new task to ToDoList..."
     ></textarea>
-    <button className="add-btn" @click="addItem">Add</button>
-    <div className="tasks" v-for="ListItem in todoList" :key="ListItem.id">
+    <button class="add-btn" @click="addItem">Add</button>
+    <div class="tasks" v-for="ListItem in todoList" :key="ListItem.id">
       <TodoItem
         :id="ListItem.id"
         :name="ListItem.name"
         :done="ListItem.done"
         :time="ListItem.time"
-        :remove="removeItem"
-        :favorite="favoriteItem"
+        @remove="removeItem"
+        @favorite="favoriteItem"
       />
     </div>
   </div>
